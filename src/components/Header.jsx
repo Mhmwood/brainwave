@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { disablePageScroll, enablePageScroll } from "scroll-lock";
 
 import { brainwave } from "../assets";
@@ -74,10 +74,11 @@ const Header = () => {
           New account
         </a>
 
-        <Button className="hidden lg:flex" href={"/signin"}>
-          Sign in
-        </Button>
-
+        <Link to={"/signin"}>
+          <Button className="hidden lg:flex" href={"/signin"}>
+            Sign in
+          </Button>
+        </Link>
         <Button
           className="ml-auto lg:hidden"
           px="px-3"

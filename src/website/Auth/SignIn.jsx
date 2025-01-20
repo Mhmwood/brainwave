@@ -1,7 +1,18 @@
+import { Link } from "react-router-dom";
 import { brainwave } from "../../assets";
 import { BackgroundCircles } from "../../components/design/Header";
+import { useState } from "react";
 
 const SignIn = () => {
+  const [msg, setMsg] = useState("");
+
+  const handleComing = () => {
+    setMsg("Coming soon");
+    setTimeout(() => {
+      setMsg(""); // Clear the message after 3 seconds
+    }, 3000);
+  };
+
   return (
     <>
       <div className="container relative flex flex-col items-center justify-center px-6 py-14 mx-auto md:h-screen lg:py-0">
@@ -74,22 +85,26 @@ const SignIn = () => {
                   </a>
                 </div>
 
-                <div className="p-0.5 rounded-lg   bg-conic-gradient animate-spinGradient">
-                  <button
-                    type="submit"
-                    className="w-full bg-n-7  rounded-lg p-3 text-n-1  "
-                  >
-                    Sign in
-                  </button>
+                <div className="p-0.5 rounded-lg   bg-conic-gradient ">
+                  <Link to={"/"}>
+                    <button
+                      type="submit"
+                      className="w-full bg-n-7  rounded-lg p-3 text-n-1  "
+                    >
+                      Sign in
+                    </button>
+                  </Link>
                 </div>
-                <p className="text-sm font-light text-gray-500 dark:text-gray-400">
-                  Don’t have an account?
-                  <a
-                    href="#"
-                    className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-                  >
-                    &nbsp;Sign up
-                  </a>
+                <p className="text-sm font-light text-gray-500 dark:text-gray-400 relative">
+                  Don’t have an account?{" "}
+                  {msg && (
+                    <div className="rounded-xl  absolute px-1 py-1.5  bottom-5 animate-fadeInUp    bg-conic-gradient">
+                      <span className="bg-n-7 py-1 px-3 rounded-lg  font-bold">
+                        {msg}
+                      </span>
+                    </div>
+                  )}
+                  <button onClick={handleComing}>&nbsp;Sign up</button>
                 </p>
               </form>
             </div>
