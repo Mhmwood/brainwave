@@ -3,11 +3,28 @@ import { smallSphere, stars } from "../assets";
 import Heading from "./Heading";
 import PricingList from "./PricingList";
 import { LeftLine, RightLine } from "./design/Pricing";
+import AOS from "aos";
+import { useEffect, useRef } from "react";
 
 const Pricing = () => {
+  const containerRef = useRef(null);
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+      once: true,
+    });
+
+    if (containerRef.current) {
+      containerRef.current.classList.add("custom-slide-left");
+    }
+  }, []);
+
   return (
     <Section className="overflow-hidden" id="pricing">
-      <div className="container relative z-2">
+      <div
+        className="container relative z-2 custom-slide-left "
+        data-aos="custom-slide-left"
+      >
         <div className="hidden relative justify-center mb-[6.5rem] lg:flex">
           <img
             src={smallSphere}

@@ -10,8 +10,21 @@ import {
 } from "./design/Services";
 
 import Generating from "./Generating";
-
+import { useEffect, useState } from "react";
+import AOS from "aos";
 const Services = () => {
+  const [activeIndex, setActiveIndex] = useState(2);
+
+  useEffect(() => {
+    // Initialize AOS
+    AOS.init({
+      duration: 800,
+      easing: "ease-in-out",
+      once: true,
+      offset: 100,
+      
+    });
+  }, []);
   return (
     <Section id="how-to-use">
       <div className="container">
@@ -21,7 +34,10 @@ const Services = () => {
         />
 
         <div className="relative">
-          <div className="relative z-1 flex items-center h-[39rem] mb-5 p-8 border border-n-1/10 rounded-3xl overflow-hidden lg:p-20 xl:h-[46rem]">
+          <div
+            className="relative  z-1 flex items-center h-[39rem] mb-5 p-8 border border-n-1/10 rounded-3xl overflow-hidden lg:p-20 xl:h-[46rem]"
+      
+          >
             <div className="absolute top-0 left-0 w-full h-full pointer-events-none md:w-3/5 xl:w-auto">
               <img
                 className="w-full h-full object-cover md:object-right"
@@ -54,7 +70,10 @@ const Services = () => {
           </div>
 
           <div className="relative z-1 grid gap-5 lg:grid-cols-2">
-            <div className="relative min-h-[39rem] border border-n-1/10 rounded-3xl overflow-hidden">
+            <div
+              className="relative min-h-[39rem] border border-n-1/10 rounded-3xl overflow-hidden"
+              data-aos="slide-right"
+            >
               <div className="absolute inset-0">
                 <img
                   src={service2}
@@ -76,32 +95,40 @@ const Services = () => {
               <PhotoChatMessage />
             </div>
 
-            <div className="p-4 bg-n-7 rounded-3xl overflow-hidden lg:min-h-[46rem]">
-              <div className="py-12 px-4 xl:px-8">
+            <div
+              className="  p-4 bg-n-7 rounded-3xl overflow-hidden lg:min-h-[46rem] "
+              data-aos="slide-left"
+            >
+              <div className=" relative py-12 px-4 xl:px-8">
                 <h4 className="h4 mb-4">Video generation</h4>
                 <p className="body-2 mb-[2rem] text-n-3">
                   The world’s most powerful AI photo and video art generation
                   engine. What will you create?
                 </p>
 
-                <ul className="flex items-center justify-between">
+                <ul className=" scroll-trigger-section  absolute inset-0 top-auto mb-4 sm:mb-0  sm:top-40  flex   items-center justify-around ">
                   {brainwaveServicesIcons.map((item, index) => (
                     <li
                       key={index}
-                      className={`rounded-2xl flex items-center justify-center ${
-                        index === 2
+                      className={`  rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300 ease-in-out ${
+                        index === activeIndex
                           ? "w-[3rem] h-[3rem] p-0.25 bg-conic-gradient md:w-[4.5rem] md:h-[4.5rem]"
-                          : "flex w-10 h-10 bg-n-6 md:w-15 md:h-15"
+                          : "flex w-10 h-10 bg-n-6 md:w-12 md:h-12"
                       }`}
+                      onClick={() => setActiveIndex(index)} // Update active icon
                     >
                       <div
-                        className={
-                          index === 2
-                            ? "flex items-center justify-center w-full h-full bg-n-7 rounded-[1rem]"
-                            : ""
-                        }
+                        className={`flex items-center justify-center w-full h-full ${
+                          index === activeIndex ? "bg-n-7 rounded-[1rem]" : ""
+                        }`}
                       >
-                        <img src={item} width={24} height={24} alt={item} />
+                        <img
+                          src={item}
+                          width={24}
+                          height={24}
+                          alt={`Icon ${index}`}
+                          className="transition-transform duration-300 ease-in-out transform hover:scale-110"
+                        />
                       </div>
                     </li>
                   ))}
